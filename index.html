@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+			integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<title>Movies app</title>
+	</head>
+	<body>
+		<header class="nav-bar">
+			<div>Movies Search App - FED Handson Test</div>
+		</header>
+		<div class="container">
+			<div class="input-field">
+				<input class="input" type="text" placeholder="Search" />
+				<button class="search-button">search</button>
+			</div>
+			<div class="movies-container"></div>
+			<div class="popup">
+				<div class="popup-container">
+					<button class="popup-close-btn">close popup</button>
+					<div class="popup-content">
+						<h2>name</h2>
+						<img src="" alt="" />
+						<a href=""></a>
+						<p>geners</p>
+						<p>description</p>
+						<div class="cast-container">
+							<div class="character-container">
+								<img src="" alt="#" />
+								<p>name as roleName</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="moviesApi.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
