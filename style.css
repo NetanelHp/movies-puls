@@ -118,3 +118,11 @@ body {
 .character-container p {
 	font-size: 15px;
 }
+
+.popup-content a {
+	display: block;
+}
+
+.popup-content > * {
+	margin: 25px 0px;
+}

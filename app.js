@@ -14,12 +14,13 @@ popupBtn.addEventListener('click', function () {
 	popup.style.display = 'none';
 });
 
+let moviesRes;
+
 button.addEventListener('click', async function () {
 	if (input.value !== '') {
-		const res = await getMovies(input.value);
-		console.log(res);
-		if (res.length) {
-			const movies = res
+		moviesRes = await getMovies(input.value);
+		if (moviesRes.length) {
+			const movies = moviesRes
 				.map((movie) => {
 					return `
                             <div class="movie-container">
@@ -33,8 +34,9 @@ button.addEventListener('click', async function () {
 			moviesContainer.innerHTML = movies;
 			const movieItems = moviesContainer.querySelectorAll('.movie-container');
 			for (let i = 0; i < movieItems.length; i++) {
-				movieItems[i].setAttribute('id', res[i].show.id);
+				movieItems[i].setAttribute('id', moviesRes[i].show.id);
 				movieItems[i].setAttribute('onCLick', `onMovieClick(this)`);
+				movieItems[i].setAttribute('index', `${i}`);
 			}
 		} else {
 			alert('No Movies founds');
@@ -43,13 +45,16 @@ button.addEventListener('click', async function () {
 	}
 });
 
-async function onMovieClick(item, data) {
-	const castContainer = document.querySelector('.cast-container');
-
+async function onMovieClick(item) {
 	popup.style.display = 'block';
+	const castContainer = document.querySelector('.cast-container');
+	const popUpContent = document.querySelector('.popup-content');
+
+	const index = item.getAttribute('index');
+
 	const res = await getCastByShowId(item.id);
-	console.log(res);
-	if (res.length) {
+
+	if (res) {
 		const characters = res
 			.map((char) => {
 				const { character, person } = char;
@@ -60,7 +65,17 @@ async function onMovieClick(item, data) {
                     </div>`;
 			})
 			.join('');
-		castContainer.innerHTML = characters;
+		const { show } = moviesRes[index];
+		popUpContent.innerHTML = `
+	    <h2 class>${show.name}</h2>
+	    <img src=${show.image ? show.image.medium : '#'} alt="" />
+	    <a href=${show.url ? show.url : 'N/A'}>link</a>
+	    <p>${show.genres ? 'Genres: ' + show.genres.join(',') : ''}</p>
+	    ${show.summary}
+	    <div class="cast-container">
+         ${characters}
+        </div>
+	`;
 	} else {
 		castContainer.innerHTML = '';
 	}
